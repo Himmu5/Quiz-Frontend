@@ -1,6 +1,6 @@
 import axios from "axios";
 
 const Axios = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://quiz-backend-h7du.onrender.com',
 })
 export default Axios;
