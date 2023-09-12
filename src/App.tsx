@@ -6,11 +6,12 @@ import Scoreboard from "./Components/Pages/Scoreboard";
 import { QuizContext } from "./Components/Context/QuizContext";
 import { useEffect, useState } from "react";
 import { getLanguages, getQuestions } from "./API/Quiz";
+import { Question } from "./Types/Quiz";
 
 function App() {
 
-  const [questions, setQuestions] = useState([]);
-  const [languages, setLanguages] = useState([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [languages, setLanguages] = useState<{ name: string }[]>([]);
   const [quizStart, setQuizStart] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("");
 
@@ -18,7 +19,7 @@ function App() {
     getLanguages().then((res) => {
       setLanguages(res);
     })
-    getQuestions().then((res) => {
+    getQuestions(selectedLanguage).then((res) => {
       setQuestions(res);
     })
 
@@ -27,7 +28,7 @@ function App() {
   return (
     <div>
       <UserProvider>
-        <QuizContext.Provider value={{ questions, languages, quizStart, setQuizStart }}>
+        <QuizContext.Provider value={{ questions, languages, quizStart, setQuizStart ,selectedLanguage , setSelectedLanguage}}>
           <Routes>
             <Route path="/Auth" element={<Register />} />
             <Route path="/" element={<Home />} />

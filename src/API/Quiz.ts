@@ -11,8 +11,8 @@ export function getLanguages(){
     })
 }
 
-export function getQuestions(){
-    return Axios.get("/questions").then((res)=>{
+export function getQuestions(lang:string){
+    return Axios.get("/questions" , { params : { lang } }).then((res)=>{
         return res.data;
     })
 }
