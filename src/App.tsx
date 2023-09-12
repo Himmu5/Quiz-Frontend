@@ -18,6 +18,7 @@ function App() {
             <Route path="/Auth" element={<Register />} />
             <Route path="/scores" element={<Scoreboard />} />
             <Route path="/quizresult" element={<QuizResult />} />
+            <Route path="*" element={<Home />} />
           </Routes>
         </QuizProvider>
       </UserProvider>
