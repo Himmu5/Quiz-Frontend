@@ -43,7 +43,7 @@ const Home: FC<P> = ({ logOut ,submit, quizResponse ,setQuizResponse, user, lang
                     }
                 </select>
 
-                <Button className='rounded-md ' onClick={() => setQuizStart(!quizStart)} >Start Quiz</Button>
+                <Button  disabled={ selectedLanguage === "" }  className={'rounded-md '+ (selectedLanguage === "" && " bg-gray-400 ") } onClick={() => setQuizStart(!quizStart)} >Start Quiz</Button>
 
             </div>}
             <div className='max-w-5xl mx-auto space-y-4'>
@@ -53,8 +53,9 @@ const Home: FC<P> = ({ logOut ,submit, quizResponse ,setQuizResponse, user, lang
                 }
                 {
 
-                    quizStart && <div className='flex justify-center py-3'>
+                    quizStart && <div className='flex justify-center gap-2 py-3'>
                         <Button children="Submit Quiz" onClick={submit} className='active:scale-90 rounded-md' />
+                        <Button className='bg-red-500 rounded-md ' onClick={()=>setQuizStart(!quizStart)}>Reset </Button>
                     </div>
                 }
 
