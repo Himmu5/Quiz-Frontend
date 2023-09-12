@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { withUser } from '../Hoc/withUser'
-import { Link, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { User } from '../../Types/User'
 import { withQuiz } from '../Hoc/withQuiz'
 import Button from '../UI-Component/Button'
