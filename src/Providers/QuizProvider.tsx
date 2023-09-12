@@ -34,7 +34,7 @@ const QuizProvider: FC<P> = ({ children }) => {
             alert("Please Attempt all questions!");
         }
         else {
-            submitQuiz(quizResponse).then((res) => {
+            submitQuiz(quizResponse , selectedLanguage).then((res) => {
                 setScore(res.score);
                 setQuizResponse({});
                 setQuizStart(false);

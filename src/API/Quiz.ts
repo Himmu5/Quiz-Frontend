@@ -17,10 +17,10 @@ export function getQuestions(lang: string) {
   });
 }
 
-export const submitQuiz = (quizResponse: { [qId: string]: number }) => {
+export const submitQuiz = (quizResponse: { [qId: string]: number } , lang:string) => {
   return Axios.post(
     "/quiz/submit",
-    { userResponse : quizResponse },
+    { userResponse : quizResponse , lang },
     { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }
   ).then((res) => {
     return res.data;
