@@ -6,6 +6,7 @@ import { withQuiz } from '../Hoc/withQuiz'
 import Button from '../UI-Component/Button'
 import { Question } from '../../Types/Quiz'
 import QuestionsMapper from '../UI-Component/QuestionsMapper'
+import Navbar from '../UI-Component/Navbar'
 
 type P = {
     user: User;
@@ -14,23 +15,20 @@ type P = {
     setSelectedLanguage: (s: string) => void;
     setQuizStart: (s: boolean) => void;
     quizStart: boolean;
-    questions: Question[]
+    questions: Question[];
+    quizResponse: { [qId: string]: number };
+    setQuizResponse: (r: { [qId: string]: number }) => void;
+    submit:()=>void;
+    logOut:()=>void;
 }
 
-const Home: FC<P> = ({ user, languages, setSelectedLanguage, selectedLanguage, setQuizStart, quizStart, questions }) => {
+const Home: FC<P> = ({ logOut ,submit, quizResponse ,setQuizResponse, user, languages, setSelectedLanguage, selectedLanguage, setQuizStart, quizStart, questions }) => {
     if (!user) {
         return <Navigate to={"/Auth"} />
     }
     return <>
 
-        <div className='flex justify-between items-center px-4 bg-gray-500  py-2 shadow-2xl '>
-            <div></div>
-
-            <div className='flex items-center gap-3 font-bold'>
-                <Link to={"/scores"} children="Scoreboard" className='bg-gray-200 px-3 py-1 rounded-md border hover:scale-90' />
-                <Link to={"/"} children="LOG OUT" className='bg-gray-200 px-3 py-1 rounded-md border hover:scale-90' />
-            </div>
-        </div>
+       <Navbar logOut={logOut} />
         <div className='  min-h-screen bg-gray-300'>
 
 
@@ -49,13 +47,16 @@ const Home: FC<P> = ({ user, languages, setSelectedLanguage, selectedLanguage, s
 
             </div>}
             <div className='max-w-5xl mx-auto space-y-4'>
-                <h1 className='text-xl sm:text-2xl md:text-3xl  text-center py-10 '> Quiz is Started  </h1>
+                {quizStart && <h1 className='text-xl sm:text-2xl md:text-3xl  text-center py-10 '> Quiz is Started  </h1>}
                 {
-                    quizStart && <QuestionsMapper questions={questions} />
+                    quizStart && <QuestionsMapper setQuizResponse={setQuizResponse} quizResponse={quizResponse} questions={questions} />
                 }
-                <div className='flex justify-center py-3'>
-                    <Button children="Submit Quiz" className='active:scale-90 rounded-md' />
-                </div>
+                {
+
+                    quizStart && <div className='flex justify-center py-3'>
+                        <Button children="Submit Quiz" onClick={submit} className='active:scale-90 rounded-md' />
+                    </div>
+                }
 
             </div>
 

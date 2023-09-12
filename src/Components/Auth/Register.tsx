@@ -28,6 +28,7 @@ const Register: FC<P> = ({ user, setUser }) => {
         } else {
 
             Axios.post('/Signin', { email: formValues.email, password: formValues.password }, { headers: { Authorization: "Bearer " + token } }).then((res) => {
+                localStorage.setItem("token", res.data.data.idToken)
                 setUser(res.data);
             })
         }
@@ -46,7 +47,7 @@ const Register: FC<P> = ({ user, setUser }) => {
             <Button children={formType === "Register" ? "Register" : "Signin"} />
 
             <div className='text-sm pt-3 text-center underline ' onClick={() => setFormType(formType === "Register" ? "Signin" : "Register")} >
-                {formType === "Register" ? <p>Already have an account?</p> : <p>Create a new account?</p>}
+                {formType === "Register" ? <p className='cursor-pointer'>Already have an account?</p> : <p className='cursor-pointer'> Create a new account?</p>}
             </div>
         </form>
 

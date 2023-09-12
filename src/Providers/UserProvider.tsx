@@ -18,7 +18,13 @@ const UserProvider: FC<P> = ({ children }) => {
         }
     }, [])
 
-    return <UserContext.Provider value={{ setUser, user }}>
+
+    function logOut (){
+        localStorage.removeItem('token');
+        setUser(undefined);
+    }
+
+    return <UserContext.Provider value={{ setUser, user , logOut }}>
         {children}
     </UserContext.Provider>
 }
